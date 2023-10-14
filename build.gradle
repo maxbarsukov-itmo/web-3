@@ -1,6 +1,7 @@
 plugins {
   id 'java'
   id 'war'
+  id 'org.flywaydb.flyway' version '9.8.1'
 }
 
 group 'web'
@@ -36,8 +37,20 @@ dependencies {
   implementation('org.apache.commons:commons-lang3:3.12.0')
   implementation('com.google.code.gson:gson:2.10.1')
 
+  runtimeOnly('org.flywaydb:flyway-gradle-plugin:9.16.1')
+
   compileOnly('org.projectlombok:lombok:1.18.26')
   annotationProcessor('org.projectlombok:lombok:1.18.26')
   testCompileOnly('org.projectlombok:lombok:1.18.26')
   testAnnotationProcessor('org.projectlombok:lombok:1.18.26')
 }
+
+flyway {
+  locations = ["filesystem:./sql/migrations"]
+  url = "jdbc:postgresql://127.0.0.1:5432/web3"
+  user = "s367081"
+  password = "s367081"
+  schemas = ['public']
+}
+
+flywayMigrate.dependsOn(classes)
