@@ -1,1 +1,1 @@
-DROP TABLE IF EXISTS points;
+DROP TABLE IF EXISTS attempts;

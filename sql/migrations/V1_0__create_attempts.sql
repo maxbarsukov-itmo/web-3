@@ -1,6 +1,6 @@
 BEGIN;
 
-CREATE TABLE points (
+CREATE TABLE attempts (
   id SERIAL PRIMARY KEY,
   x FLOAT NOT NULL,
   y FLOAT NOT NULL,
