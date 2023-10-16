@@ -6,7 +6,7 @@ CREATE TABLE attempts (
   y FLOAT NOT NULL,
   r FLOAT NOT NULL,
   result BOOLEAN NOT NULL,
-  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  created_at DATE NOT NULL,
   execution_time BIGINT NOT NULL
 );
 

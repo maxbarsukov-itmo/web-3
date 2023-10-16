@@ -1,14 +1,13 @@
 package web.models;
 
-import jakarta.persistence.*;
-
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
 import jakarta.validation.constraints.NotNull;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Getter
@@ -19,6 +18,22 @@ import java.time.LocalDateTime;
 @SessionScoped
 @Table(name="attempts")
 public class Attempt implements Serializable {
+  @Getter
+  @ToString
+  @AllArgsConstructor
+  public static class Coordinates {
+    private final double x;
+    private final double y;
+    private final double r;
+    private final boolean result;
+  }
+
+  public Attempt(double x, double y, double r) {
+    this.x = x;
+    this.y = y;
+    this.r = r;
+  }
+
   @Id
   @GeneratedValue(strategy=GenerationType.IDENTITY)
   @Column(name="id", nullable=false, unique=true)
@@ -42,9 +57,13 @@ public class Attempt implements Serializable {
 
   @NotNull
   @Column(name="created_at", nullable=false)
-  private LocalDateTime createdAt;
+  private Date createdAt;
 
   @NotNull
   @Column(name="execution_time", nullable=false)
   private Long executionTime;
+
+  public Coordinates getCoordinates() {
+    return new Coordinates(x, y, r, result);
+  }
 }
